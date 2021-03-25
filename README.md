@@ -1,2 +1,2 @@
 # Dopetox
-A Dopamine detox web app
+A web app that helps people detox their Dopamine levels
