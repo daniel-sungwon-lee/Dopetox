@@ -1,3 +1,7 @@
 .App {
   text-align: center;
 }
+
+.MuiLinearProgress-root.MuiLinearProgress-colorSecondary {
+  background-color: transparent;
+}
