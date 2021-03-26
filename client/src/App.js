@@ -3,18 +3,20 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/home';
 import Progress from './components/progress';
+import Nav from './components/nav';
 
 export default function App() {
-  const [loading, setLoading] = useState('');
+  const [progress, setProgress] = useState('');
 
   useEffect(() => {
-    setLoading('d-none')
+    setProgress('d-none')
   }, [])
 
   return (
     <div className="App">
       <Router>
-        <Progress loading={loading} />
+        <Progress progress={progress} />
+        <Nav setProgress={setProgress} />
         <Switch>
 
           <Route exact path="/">

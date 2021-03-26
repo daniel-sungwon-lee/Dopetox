@@ -2,11 +2,11 @@ import React from 'react';
 import { LinearProgress } from '@material-ui/core';
 
 export default function Progress(props) {
-  const { loading } = props
+  const { progress } = props
 
   return (
     <div className="fixed-top">
-      <LinearProgress className={loading} color="secondary" />
+      <LinearProgress className={progress} color="secondary" />
     </div>
   )
 }
