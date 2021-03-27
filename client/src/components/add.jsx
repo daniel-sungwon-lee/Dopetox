@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, TextField,
          Collapse, DialogActions, IconButton } from '@material-ui/core';
 import { NoteAddRounded, CloseRounded } from '@material-ui/icons';
@@ -32,6 +32,40 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function Add(props) {
   const classes = useStyles()
   const { open, setOpen } = props
+
+  const [username, setUsername] = useState('')
+  const [detox, setDetox] = useState('')
+  const [duration, setDuration] = useState('')
+  const [notes, setNotes] = useState('')
+
+  const handleChange = (e) => {
+    const { value, id } = e.target
+
+    // eslint-disable-next-line default-case
+    switch(id) {
+      case 'username':
+        setUsername(value)
+        break;
+      case 'detox':
+        setDetox(value)
+        break;
+      case 'duration':
+        setDuration(value)
+        break;
+      case 'notes':
+        setNotes(value)
+        break;
+    }
+  }
+
+  const handleClose = (e) => {
+    setUsername('')
+    setDetox('')
+    setDuration('')
+    setNotes('')
+    setOpen(false)
+  }
+
   return (
     <Dialog open={open} onClose={() => setOpen(false)} classes={{paper: classes.dialog}}
      TransitionComponent={Transition}>
@@ -45,30 +79,30 @@ export default function Add(props) {
           <DialogContent>
 
             <div className="mb-3">
-              <TextField multiline id="username" variant="outlined" label="Username" classes={{ root: classes.textarea }}
-                helperText="Ex: Anonymous" required InputLabelProps={{ required: false }} fullWidth />
+              <TextField multiline id="username" variant="outlined" label="Username" classes={{ root: classes.textarea }} value={username}
+                helperText="Ex: Anonymous" required InputLabelProps={{ required: false }} fullWidth onChange={handleChange} />
             </div>
 
             <div className="mb-3">
-              <TextField multiline id="detox" variant="outlined" label="Detox" classes={{root: classes.textarea}}
-              helperText="Ex: Porn" required InputLabelProps={{required: false}} fullWidth />
+              <TextField multiline id="detox" variant="outlined" label="Detox" classes={{root: classes.textarea}} value={detox}
+               helperText="Ex: Porn" required InputLabelProps={{required: false}} fullWidth onChange={handleChange} />
             </div>
 
             <div className="mb-3">
-              <TextField multiline id="duration" variant="outlined" label="Duration" classes={{ root: classes.textarea }}
-              helperText="Ex: At least 1 month" required InputLabelProps={{ required: false }} fullWidth />
+              <TextField multiline id="duration" variant="outlined" label="Duration" classes={{ root: classes.textarea }} value={duration}
+               helperText="Ex: At least 1 month" required InputLabelProps={{ required: false }} fullWidth onChange={handleChange} />
             </div>
 
             <div className="mb-3">
               <TextField multiline id="notes" variant="outlined" label="Notes" classes={{ root: classes.textarea }}
                 helperText="Any additional notes" required InputLabelProps={{ required: false }} fullWidth
-                rows={5} />
+                rows={5} onChange={handleChange} value={notes} />
             </div>
 
           </DialogContent>
 
           <DialogActions>
-            <IconButton>
+            <IconButton onClick={handleClose}>
               <CloseRounded color="secondary" className={classes.icon} />
             </IconButton>
 
