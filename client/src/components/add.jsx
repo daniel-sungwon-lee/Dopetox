@@ -77,6 +77,10 @@ export default function Add(props) {
       body: JSON.stringify(reqBody)
     })
       .then(() => {
+        setUsername('')
+        setDetox('')
+        setDuration('')
+        setNotes('')
         setOpen(false)
         setProgress('d-none')
       })
