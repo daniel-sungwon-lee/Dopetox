@@ -31,7 +31,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function Add(props) {
   const classes = useStyles()
-  const { open, setOpen } = props
+  const { open, setOpen, setProgress } = props
 
   const [username, setUsername] = useState('')
   const [detox, setDetox] = useState('')
@@ -66,6 +66,23 @@ export default function Add(props) {
     setOpen(false)
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setProgress('')
+
+    const reqBody = { username, detox, duration, notes }
+    fetch('/api/detox', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(reqBody)
+    })
+      .then(() => {
+        setOpen(false)
+        setProgress('d-none')
+      })
+      .catch(() => window.location.reload())
+  }
+
   return (
     <Dialog open={open} onClose={() => setOpen(false)} classes={{paper: classes.dialog}}
      TransitionComponent={Transition}>
@@ -75,7 +92,7 @@ export default function Add(props) {
           <h2>Add New Detox</h2>
         </DialogTitle>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <DialogContent>
 
             <div className="mb-3">

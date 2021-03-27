@@ -18,7 +18,9 @@ const useStyles = makeStyles({
 })
 
 export default function Nav(props) {
+  const { setProgress } = props
   const classes = useStyles();
+
   const [show, setShow] = useState(false)
   const [add, setAdd] = useState(false)
 
@@ -32,7 +34,7 @@ export default function Nav(props) {
         <AppBar position="sticky" classes={{root: classes.nav}}>
           <Toolbar className="justify-content-between">
 
-            <a href="/" className="text-decoration-none" onClick={() => props.setProgress('')}>
+            <a href="/" className="text-decoration-none" onClick={() => setProgress('')}>
               <div className="d-flex align-items-center">
                 <img src="images/dopetox.svg" alt="Dopetox logo" width="40" />
                 <h3 className="mx-2 my-0 text-dark">Dopetox</h3>
@@ -45,7 +47,7 @@ export default function Nav(props) {
               </IconButton>
             </Tooltip>
 
-            <Add open={add} setOpen={setAdd} />
+            <Add open={add} setOpen={setAdd} setProgress={setProgress} />
 
           </Toolbar>
         </AppBar>
