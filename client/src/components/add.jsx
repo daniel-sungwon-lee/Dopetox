@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dialog, DialogTitle, DialogContent, TextField,
-         Collapse } from '@material-ui/core';
+         Collapse, DialogActions, IconButton } from '@material-ui/core';
+import { NoteAddRounded, CloseRounded } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -14,6 +15,13 @@ const useStyles = makeStyles({
         borderColor: "#FBDADE"
       }
     }
+  },
+  iconAdd: {
+    color: "#52BD4C",
+    fontSize: "2.5rem"
+  },
+  icon: {
+    fontSize: "2.5rem"
   }
 })
 
@@ -30,14 +38,44 @@ export default function Add(props) {
       <div className="m-3">
 
         <DialogTitle>
-          <h2>What do you want to detox?</h2>
+          <h2>Add New Detox</h2>
         </DialogTitle>
 
         <form>
           <DialogContent>
-            <TextField multiline id="content" variant="outlined" label="Detox" classes={{root: classes.textarea}}
-             helperText="Ex: Porn" required InputLabelProps={{required: false}} />
+
+            <div className="mb-3">
+              <TextField multiline id="username" variant="outlined" label="Username" classes={{ root: classes.textarea }}
+                helperText="Ex: Anonymous" required InputLabelProps={{ required: false }} fullWidth />
+            </div>
+
+            <div className="mb-3">
+              <TextField multiline id="detox" variant="outlined" label="Detox" classes={{root: classes.textarea}}
+              helperText="Ex: Porn" required InputLabelProps={{required: false}} fullWidth />
+            </div>
+
+            <div className="mb-3">
+              <TextField multiline id="duration" variant="outlined" label="Duration" classes={{ root: classes.textarea }}
+              helperText="Ex: At least 1 month" required InputLabelProps={{ required: false }} fullWidth />
+            </div>
+
+            <div className="mb-3">
+              <TextField multiline id="notes" variant="outlined" label="Notes" classes={{ root: classes.textarea }}
+                helperText="Any additional notes" required InputLabelProps={{ required: false }} fullWidth
+                rows={5} />
+            </div>
+
           </DialogContent>
+
+          <DialogActions>
+            <IconButton>
+              <CloseRounded color="secondary" className={classes.icon} />
+            </IconButton>
+
+            <IconButton type="submit">
+              <NoteAddRounded className={classes.iconAdd} />
+            </IconButton>
+          </DialogActions>
         </form>
 
       </div>
