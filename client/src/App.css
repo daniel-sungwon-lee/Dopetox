@@ -8,3 +8,7 @@
 .MuiLinearProgress-root.MuiLinearProgress-colorSecondary {
   background-color: transparent;
 }
+
+.MuiFormLabel-root.Mui-focused {
+  color: #FB7B76 !important;
+}

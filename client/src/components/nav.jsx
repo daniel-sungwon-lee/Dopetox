@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AppBar, Collapse, Toolbar, Tooltip, IconButton } from '@material-ui/core';
 import { NoteAddRounded } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+import Add from './add';
 
 const useStyles = makeStyles({
   nav: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles({
 export default function Nav(props) {
   const classes = useStyles();
   const [show, setShow] = useState(false)
+  const [add, setAdd] = useState(false)
 
   useEffect(() => {
     setShow(true)
@@ -38,10 +40,12 @@ export default function Nav(props) {
             </a>
 
             <Tooltip title="Add" classes={{ tooltip: classes.tooltip }}>
-              <IconButton>
+              <IconButton onClick={() => setAdd(true)}>
                 <NoteAddRounded className={classes.icon} />
               </IconButton>
             </Tooltip>
+
+            <Add open={add} setOpen={setAdd} />
 
           </Toolbar>
         </AppBar>
