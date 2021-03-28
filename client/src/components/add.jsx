@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, TextField,
          Collapse, DialogActions, IconButton } from '@material-ui/core';
-import { NoteAddRounded, CloseRounded } from '@material-ui/icons';
+import { NoteAddRounded, RemoveCircleRounded } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -124,7 +124,7 @@ export default function Add(props) {
 
           <DialogActions>
             <IconButton onClick={handleClose}>
-              <CloseRounded color="secondary" className={classes.icon} />
+              <RemoveCircleRounded color="secondary" className={classes.icon} />
             </IconButton>
 
             <IconButton type="submit">
