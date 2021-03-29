@@ -62,6 +62,21 @@ app.post('/api/detox', (req, res, next) => {
     .catch(err => next(err))
 })
 
+//home
+app.get('/api/detox/', (req, res, next) => {
+
+  const sql = `
+  select * from "detox"
+  order by "id" desc
+  `;
+
+  db.query(sql)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+})
+
 //for Heroku deployment
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files

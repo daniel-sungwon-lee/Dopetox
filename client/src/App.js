@@ -20,7 +20,7 @@ export default function App() {
         <Switch>
 
           <Route exact path="/">
-            <Home />
+            <Home setProgress={setProgress} />
           </Route>
 
         </Switch>
