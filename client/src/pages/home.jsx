@@ -32,7 +32,8 @@ export default function Home(props) {
               <Paper key={id} className="p-4 mb-5 mx-3">
 
                 <div>
-                  <CardHeader title={<h3 style={{ color: "#f50057" }}>{detox}</h3>} subheader={username} />
+                  <CardHeader title={<h3 style={{ color: "#f50057" }}>{detox}</h3>}
+                   subheader={<h6>{`Posted by: ${username}`}</h6>} />
                   <CardContent>
                     <div className="mb-4">
                       <h5>Duration of detox:</h5>
