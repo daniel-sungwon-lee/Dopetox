@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Paper } from '@material-ui/core';
+import { CardContent, CardHeader, Paper } from '@material-ui/core';
 
 export default function Home(props) {
   const { setProgress } = props
@@ -23,14 +23,23 @@ export default function Home(props) {
       <div>
         {
           data.map(post => {
-            const { id, username, detox, duration, notes } = post
+            const { id, username, detox, duration, plan, createdAt } = post
+            const dateArr = createdAt.split("T")
+            const [date] = dateArr
 
             return (
-              <Paper key={id} className="p-5">
-                <h3>{username}</h3>
-                <h3>{detox}</h3>
-                <h4>{duration}</h4>
-                <h4>{notes}</h4>
+              <Paper key={id} className="p-4 mb-5">
+
+                <CardHeader title={detox} subheader={username} />
+                <CardContent>
+                  <h5>Duration of detox:</h5>
+                  <h6>{duration}</h6>
+                  <h5>Game plan:</h5>
+                  <h6>{plan}</h6>
+                  <h5>Start date:</h5>
+                  <h6>{date}</h6>
+                </CardContent>
+
               </Paper>
             )
           })

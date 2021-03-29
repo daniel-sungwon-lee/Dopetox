@@ -47,13 +47,13 @@ function errorMiddleware(err, req, res, next) {
 
 //add
 app.post('/api/detox', (req, res, next) => {
-  const { username, detox, duration, notes } = req.body;
+  const { username, detox, duration, plan } = req.body;
 
   const sql = `
-  insert into "detox" ("username", "detox", "duration", "notes")
+  insert into "detox" ("username", "detox", "duration", "plan")
   values ($1, $2, $3, $4)
   `;
-  const params = [username, detox, duration, notes]
+  const params = [username, detox, duration, plan]
 
   db.query(sql, params)
     .then(result => {

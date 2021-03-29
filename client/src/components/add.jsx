@@ -36,7 +36,7 @@ export default function Add(props) {
   const [username, setUsername] = useState('')
   const [detox, setDetox] = useState('')
   const [duration, setDuration] = useState('')
-  const [notes, setNotes] = useState('')
+  const [plan, setPlan] = useState('')
 
   const handleChange = (e) => {
     const { value, id } = e.target
@@ -52,8 +52,8 @@ export default function Add(props) {
       case 'duration':
         setDuration(value)
         break;
-      case 'notes':
-        setNotes(value)
+      case 'plan':
+        setPlan(value)
         break;
     }
   }
@@ -62,7 +62,7 @@ export default function Add(props) {
     setUsername('')
     setDetox('')
     setDuration('')
-    setNotes('')
+    setPlan('')
     setOpen(false)
   }
 
@@ -70,7 +70,7 @@ export default function Add(props) {
     e.preventDefault()
     setProgress('')
 
-    const reqBody = { username, detox, duration, notes }
+    const reqBody = { username, detox, duration, plan }
     fetch('/api/detox', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -80,7 +80,7 @@ export default function Add(props) {
         setUsername('')
         setDetox('')
         setDuration('')
-        setNotes('')
+        setPlan('')
         setOpen(false)
         setProgress('d-none')
       })
@@ -106,7 +106,7 @@ export default function Add(props) {
 
             <div className="mb-3">
               <TextField multiline id="detox" variant="outlined" label="Detox" classes={{root: classes.textarea}} value={detox}
-               helperText="Ex: Porn" required InputLabelProps={{required: false}} fullWidth onChange={handleChange} />
+               helperText="Ex: YouTube" required InputLabelProps={{required: false}} fullWidth onChange={handleChange} />
             </div>
 
             <div className="mb-3">
@@ -115,9 +115,9 @@ export default function Add(props) {
             </div>
 
             <div className="mb-3">
-              <TextField multiline id="notes" variant="outlined" label="Notes" classes={{ root: classes.textarea }}
-                helperText="Any additional notes" required InputLabelProps={{ required: false }} fullWidth
-                rows={5} onChange={handleChange} value={notes} />
+              <TextField multiline id="plan" variant="outlined" label="Plan" classes={{ root: classes.textarea }}
+                helperText="Ex: Limit to only 2 hours per day" required InputLabelProps={{ required: false }} fullWidth
+                rows={5} onChange={handleChange} value={plan} />
             </div>
 
           </DialogContent>
