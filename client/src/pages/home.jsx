@@ -25,14 +25,14 @@ export default function Home(props) {
         {
           data.map(post => {
             const { id, username, detox, duration, plan, createdAt } = post
-            const dateArr = createdAt.split("T")
-            const [date] = dateArr
+            const dateNew = new Date(createdAt)
+            const date = dateNew.toLocaleDateString()
 
             return (
-              <Paper key={id} className="p-4 mb-5">
+              <Paper key={id} className="p-4 mb-5 mx-3">
 
                 <div>
-                  <CardHeader title={detox} subheader={username} />
+                  <CardHeader title={<h3 style={{ color: "#f50057" }}>{detox}</h3>} subheader={username} />
                   <CardContent>
                     <div className="mb-4">
                       <h5>Duration of detox:</h5>
