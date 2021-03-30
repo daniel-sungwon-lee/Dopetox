@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { CardContent, CardHeader, Collapse, Paper, Zoom, Fab,
-         useScrollTrigger } from '@material-ui/core';
+         useScrollTrigger, CardActions, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TimeAgo from 'react-timeago';
-import { KeyboardArrowUpRounded } from '@material-ui/icons';
+import { KeyboardArrowUpRounded, ExpandMoreRounded } from '@material-ui/icons';
+import clsx from 'clsx';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles( theme => ({
   paper: {
     padding: "1.5rem",
     margin: "0 1rem 3rem",
@@ -35,8 +36,29 @@ const useStyles = makeStyles({
     boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
     padding: "16px",
     backgroundColor: "white"
+  },
+  expand: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest
+    })
+  },
+  expandOpen: {
+    transform: "rotate(180deg)"
+  },
+  button: {
+    backgroundColor: "white",
+    boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+    transition: theme.transitions.create("all", {
+      duration: theme.transitions.duration.short
+    })
+  },
+  icon: {
+    fontSize: "2rem",
+    color: "#FB7B76"
   }
-})
+}))
 
 export default function Home(props) {
   const { setProgress } = props
@@ -44,6 +66,7 @@ export default function Home(props) {
 
   const [data, setData] = useState([])
   const [show, setShow] = useState(false)
+  const [expanded, setExpanded] = useState([])
 
   useEffect(() => {
     setProgress('')
@@ -57,6 +80,16 @@ export default function Home(props) {
       })
       .catch(() => window.location.reload())
   }, [setProgress])
+
+  const handleExpand = (id) => () => {
+    if(expanded.includes(id)) {
+      const updatedExpanded = expanded.filter(iden => iden !== id)
+      setExpanded(updatedExpanded)
+
+    } else {
+      setExpanded([...expanded, id])
+    }
+  }
 
   return (
     <div className="container" style={{paddingBottom: "6rem"}}>
@@ -75,7 +108,9 @@ export default function Home(props) {
                   <div>
                     <CardHeader title={<h3 style={{ color: "#f50057" }}>{detox}</h3>}
                     subheader={<h6>{`Posted by: ${username}`}</h6>} className={classes.header} />
+
                     <CardContent>
+
                       <div className={classes.row}>
                         <h5>Duration of detox:</h5>
                         <h6>{duration}</h6>
@@ -91,8 +126,21 @@ export default function Home(props) {
                         <h6 className="m-0">{date}</h6>
                         <TimeAgo date={createdAt} style={{ color: "#FB7B76" }} />
                       </div>
+
                     </CardContent>
                   </div>
+
+                  <CardActions>
+
+                    <IconButton className={clsx(classes.expand, classes.button, {
+                      [classes.expandOpen]: expanded.includes(id),
+                    })} onClick={handleExpand(id)}>
+
+                      <ExpandMoreRounded className={classes.icon} />
+
+                    </IconButton>
+
+                  </CardActions>
 
                 </Paper>
               </Collapse>
