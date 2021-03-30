@@ -75,7 +75,7 @@ const useStyles = makeStyles( theme => ({
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    opacity: "0.2",
+    opacity: "0.5",
     color: "#FB7B76"
   },
   hidden: {
@@ -121,7 +121,16 @@ export default function Home(props) {
 
   return (
     <div className="container" style={{paddingBottom: "6rem"}}>
+
       <h1 className="mb-5">Detox</h1>
+
+      <div className={clsx(classes.empty, { [classes.hidden]: hidden })}>
+        <h2>Such Empty...</h2>
+        <Icon>
+          <MoodBadRounded fontSize="large" />
+        </Icon>
+      </div>
+
       <div>
         {
           data.map(post => {
@@ -131,14 +140,6 @@ export default function Home(props) {
 
             return (
               <Collapse in={show} timeout={800}>
-
-                <div className={clsx(classes.empty, { [classes.hidden] : hidden })}>
-                  <h2>Such Empty...</h2>
-                  <Icon>
-                    <MoodBadRounded fontSize="large" />
-                  </Icon>
-                </div>
-
                 <Paper key={id} className={classes.paper} elevation={3}>
 
                   <div>
