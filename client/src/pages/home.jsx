@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { CardContent, CardHeader, Collapse, Paper, Zoom, Fab,
-         useScrollTrigger, CardActions, IconButton } from '@material-ui/core';
+import { CardContent, CardHeader, Collapse, Paper, Zoom, Fab, List,
+         useScrollTrigger, CardActions, IconButton, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TimeAgo from 'react-timeago';
-import { KeyboardArrowUpRounded, ExpandMoreRounded } from '@material-ui/icons';
+import { KeyboardArrowUpRounded, ExpandMoreRounded, AddCommentRounded } from '@material-ui/icons';
 import clsx from 'clsx';
 
 const useStyles = makeStyles( theme => ({
@@ -57,6 +57,13 @@ const useStyles = makeStyles( theme => ({
   icon: {
     fontSize: "2rem",
     color: "#FB7B76"
+  },
+  textarea: {
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: "#FBDADE"
+      }
+    }
   }
 }))
 
@@ -131,7 +138,6 @@ export default function Home(props) {
                   </div>
 
                   <CardActions>
-
                     <IconButton className={clsx(classes.expand, classes.button, {
                       [classes.expandOpen]: expanded.includes(id),
                     })} onClick={handleExpand(id)}>
@@ -139,8 +145,13 @@ export default function Home(props) {
                       <ExpandMoreRounded className={classes.icon} />
 
                     </IconButton>
-
                   </CardActions>
+
+                  <Collapse in={expanded.includes(id)} timeout="auto">
+
+                    <Comment id={id} setProgress={setProgress} />
+
+                  </Collapse>
 
                 </Paper>
               </Collapse>
@@ -158,6 +169,45 @@ export default function Home(props) {
       </ScrollTop>
 
     </div>
+  )
+}
+
+//comment
+function Comment(props) {
+  const { id, setProgress } = props
+  const classes = useStyles()
+
+  const [comment, setComment] = useState('')
+  const [comments, setComments] = useState([])
+
+  const handleChange = (e) => {
+    const { value } = e.target
+    setComment(value)
+  }
+
+  const handleSubmit = (e) => {
+    setProgress('')
+    e.preventDefault()
+  }
+
+  return (
+    <CardContent>
+      <List>
+        {
+
+        }
+      </List>
+
+      <form onSubmit={handleSubmit}>
+        <TextField label="Ask how it's going..." variant="outlined" required multiline
+          InputLabelProps={{ required: false }} onChange={handleChange} value={comment}
+          className={classes.textarea} />
+
+        <IconButton type="submit">
+          <AddCommentRounded className={classes.icon} />
+        </IconButton>
+      </form>
+    </CardContent>
   )
 }
 

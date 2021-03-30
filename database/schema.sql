@@ -9,3 +9,18 @@ CREATE TABLE "detox" (
 ) WITH (
   OIDS=FALSE
 );
+
+CREATE TABLE "comments" (
+	"commentId" serial NOT NULL,
+	"id" serial NOT NULL,
+	"comment" TEXT NOT NULL,
+	"commentedAt" TIMESTAMP NOT NULL DEFAULT NOW(),
+	CONSTRAINT "comments_pk" PRIMARY KEY ("commentId")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+
+ALTER TABLE "comments" ADD CONSTRAINT "comments_fk0" FOREIGN KEY ("id") REFERENCES "detox"("id");
