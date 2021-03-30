@@ -29,8 +29,8 @@ export default function Nav(props) {
   }, [])
 
   return (
-    <Collapse in={show} timeout="auto">
-      <div className="sticky-top mb-5">
+    <Collapse in={show} timeout="auto" className="sticky-top">
+      <div className="mb-5">
         <AppBar position="sticky" classes={{root: classes.nav}}>
           <Toolbar className="justify-content-between">
 
