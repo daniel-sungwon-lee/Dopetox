@@ -60,6 +60,9 @@ const useStyles = makeStyles( theme => ({
     color: "#FB7B76"
   },
   textarea: {
+    backgroundColor: "white",
+    borderRadius: "4px",
+    marginBottom: "0.5rem",
     '& .MuiOutlinedInput-root': {
       '&.Mui-focused fieldset': {
         borderColor: "#FBDADE"
@@ -225,7 +228,7 @@ function Comment(props) {
 
   return (
     <CardContent>
-      <List>
+      <List style={{paddingBottom: "1.5rem"}}>
         {
           comments.map(comm => {
             const { comment, commentedAt } = comm
@@ -246,7 +249,7 @@ function Comment(props) {
       <form onSubmit={handleSubmit}>
         <TextField label="Ask how it's going..." variant="outlined" required multiline
           InputLabelProps={{ required: false }} onChange={handleChange} value={comment}
-          className={classes.textarea} />
+          className={classes.textarea} fullWidth />
 
         <IconButton type="submit">
           <AddCommentRounded className={classes.icon} />
