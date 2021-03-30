@@ -77,6 +77,23 @@ app.get('/api/detox/', (req, res, next) => {
     .catch(err => next(err));
 })
 
+//comment
+app.post('/api/comments', (req, res, next) => {
+  const { id, comment } = req.body;
+
+  const sql = `
+  insert into "comments" ("id", "comment")
+  values ($1, $2)
+  `;
+  const params = [id, comment]
+
+  db.query(sql, params)
+    .then(result => {
+      res.status(201).json(result.rows[0])
+    })
+    .catch(err => next(err))
+})
+
 //for Heroku deployment
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
