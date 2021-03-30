@@ -6,15 +6,22 @@ import TimeAgo from 'react-timeago';
 import { KeyboardArrowUpRounded } from '@material-ui/icons';
 
 const useStyles = makeStyles({
+  paper: {
+    padding: "1.5rem",
+    margin: "0 1rem 3rem",
+    borderRadius: "1rem"
+  },
   fab: {
     position: "fixed",
-    bottom: "1.5rem",
-    right: "1.5rem"
+    bottom: "1rem",
+    right: "1rem"
   }
 })
 
 export default function Home(props) {
   const { setProgress } = props
+  const classes = useStyles()
+
   const [data, setData] = useState([])
   const [show, setShow] = useState(false)
 
@@ -42,8 +49,8 @@ export default function Home(props) {
             const date = dateNew.toLocaleDateString()
 
             return (
-              <Collapse in={show} timeout="auto">
-                <Paper key={id} className="p-4 mb-5 mx-3">
+              <Collapse in={show} timeout={800}>
+                <Paper key={id} className={classes.paper} elevation={3}>
 
                   <div>
                     <CardHeader title={<h3 style={{ color: "#f50057" }}>{detox}</h3>}
@@ -90,6 +97,7 @@ export default function Home(props) {
 function ScrollTop(props) {
   const { children, window } = props;
   const classes = useStyles();
+
   const trigger = useScrollTrigger({
     target: window ? window() : undefined,
     disableHysteresis: true,
