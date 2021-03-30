@@ -9,12 +9,32 @@ const useStyles = makeStyles({
   paper: {
     padding: "1.5rem",
     margin: "0 1rem 3rem",
-    borderRadius: "1rem"
+    borderRadius: "1rem",
+    backgroundColor: "#FFEBED"
   },
   fab: {
     position: "fixed",
     bottom: "1rem",
     right: "1rem"
+  },
+  header: {
+    borderRadius: "6rem",
+    boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+    backgroundColor: "white",
+    margin: "1.5rem 0"
+  },
+  row: {
+    borderRadius: "6rem",
+    boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+    padding: "16px",
+    margin: "0 auto 1.5rem",
+    backgroundColor: "white"
+  },
+  bottom: {
+    borderRadius: "6rem",
+    boxShadow: "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+    padding: "16px",
+    backgroundColor: "white"
   }
 })
 
@@ -54,19 +74,19 @@ export default function Home(props) {
 
                   <div>
                     <CardHeader title={<h3 style={{ color: "#f50057" }}>{detox}</h3>}
-                    subheader={<h6>{`Posted by: ${username}`}</h6>} />
+                    subheader={<h6>{`Posted by: ${username}`}</h6>} className={classes.header} />
                     <CardContent>
-                      <div className="mb-4">
+                      <div className={classes.row}>
                         <h5>Duration of detox:</h5>
                         <h6>{duration}</h6>
                       </div>
 
-                      <div className="mb-4">
+                      <div className={classes.row}>
                         <h5>Game plan:</h5>
                         <h6>{plan}</h6>
                       </div>
 
-                      <div>
+                      <div className={classes.bottom}>
                         <h5>Start date:</h5>
                         <h6 className="m-0">{date}</h6>
                         <TimeAgo date={createdAt} style={{ color: "#FB7B76" }} />
