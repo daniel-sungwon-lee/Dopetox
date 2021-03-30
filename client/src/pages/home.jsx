@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { CardContent, CardHeader, Collapse, Paper, Zoom, Fab, List,
          useScrollTrigger, CardActions, IconButton, TextField, ListItem,
-         ListItemText } from '@material-ui/core';
+         ListItemText, Icon } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TimeAgo from 'react-timeago';
-import { KeyboardArrowUpRounded, ExpandMoreRounded, AddCommentRounded } from '@material-ui/icons';
+import { KeyboardArrowUpRounded, ExpandMoreRounded, AddCommentRounded,
+         MoodBadRounded } from '@material-ui/icons';
 import clsx from 'clsx';
 
 const useStyles = makeStyles( theme => ({
@@ -68,6 +69,17 @@ const useStyles = makeStyles( theme => ({
         borderColor: "#FBDADE"
       }
     }
+  },
+  empty: {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    opacity: "0.2",
+    color: "#FB7B76"
+  },
+  hidden: {
+    display: "none"
   }
 }))
 
@@ -78,6 +90,7 @@ export default function Home(props) {
   const [data, setData] = useState([])
   const [show, setShow] = useState(false)
   const [expanded, setExpanded] = useState([])
+  const [hidden, setHidden] = useState(false)
 
   useEffect(() => {
     setProgress('')
@@ -85,6 +98,10 @@ export default function Home(props) {
     fetch('/api/detox')
       .then(res => res.json())
       .then(data => {
+        if(data.length > 0){
+          setHidden(true)
+        }
+
         setData(data)
         setProgress('d-none')
         setShow(true)
@@ -114,6 +131,14 @@ export default function Home(props) {
 
             return (
               <Collapse in={show} timeout={800}>
+
+                <div className={clsx(classes.empty, { [classes.hidden] : hidden })}>
+                  <h2>Such Empty...</h2>
+                  <Icon>
+                    <MoodBadRounded fontSize="large" />
+                  </Icon>
+                </div>
+
                 <Paper key={id} className={classes.paper} elevation={3}>
 
                   <div>
