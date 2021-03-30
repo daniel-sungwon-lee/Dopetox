@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CardContent, CardHeader, Collapse, Paper, Zoom, Fab, List,
-         useScrollTrigger, CardActions, IconButton, TextField } from '@material-ui/core';
+         useScrollTrigger, CardActions, IconButton, TextField, ListItem,
+         ListItemText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TimeAgo from 'react-timeago';
 import { KeyboardArrowUpRounded, ExpandMoreRounded, AddCommentRounded } from '@material-ui/icons';
@@ -180,6 +181,18 @@ function Comment(props) {
   const [comment, setComment] = useState('')
   const [comments, setComments] = useState([])
 
+  useEffect(() => {
+    setProgress('')
+
+    fetch(`/api/comments/${id}`)
+      .then(res => res.json())
+      .then(comments => {
+        setComments(comments)
+        setProgress('d-none')
+      })
+      .catch(() => window.location.reload())
+  }, [setProgress, id])
+
   const handleChange = (e) => {
     const { value } = e.target
     setComment(value)
@@ -214,7 +227,19 @@ function Comment(props) {
     <CardContent>
       <List>
         {
+          comments.map(comm => {
+            const { comment, commentedAt } = comm
 
+            return (
+              <ListItem key={id}>
+
+                <ListItemText className="text-break" primary={comment} secondary={
+                  <TimeAgo date={commentedAt} />
+                } />
+
+              </ListItem>
+            )
+          })
         }
       </List>
 
