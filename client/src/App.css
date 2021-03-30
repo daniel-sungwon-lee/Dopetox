@@ -1,6 +1,9 @@
 * {
   font-family: SF Pro !important;
 }
+html {
+  scroll-behavior: smooth;
+}
 .App {
   text-align: center;
 }

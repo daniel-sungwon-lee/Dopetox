@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { CardContent, CardHeader, Collapse, Paper } from '@material-ui/core';
+import { CardContent, CardHeader, Collapse, Paper, Zoom, Fab,
+         useScrollTrigger } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import TimeAgo from 'react-timeago';
+import { KeyboardArrowUpRounded } from '@material-ui/icons';
+
+const useStyles = makeStyles({
+  fab: {
+    position: "fixed",
+    bottom: "1.5rem",
+    right: "1.5rem"
+  }
+})
 
 export default function Home(props) {
   const { setProgress } = props
@@ -62,6 +73,34 @@ export default function Home(props) {
           })
         }
       </div>
+
+      <ScrollTop {...props}>
+        <a href="#top">
+          <Fab color="secondary" size="small">
+            <KeyboardArrowUpRounded />
+          </Fab>
+        </a>
+      </ScrollTop>
+
     </div>
   )
+}
+
+//scroll to top fab
+function ScrollTop(props) {
+  const { children, window } = props;
+  const classes = useStyles();
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  return (
+    <Zoom in={trigger}>
+      <div role="presentation" className={classes.fab}>
+        {children}
+      </div>
+    </Zoom>
+  );
 }
