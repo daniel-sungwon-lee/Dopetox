@@ -188,6 +188,26 @@ function Comment(props) {
   const handleSubmit = (e) => {
     setProgress('')
     e.preventDefault()
+
+    const reqBody = { id, comment }
+
+    fetch('/api/comments', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(reqBody)
+    })
+      .then(() => {
+        setComment('')
+
+        fetch(`/api/comments/${id}`)
+          .then(res => res.json())
+          .then(comments => {
+            setComments(comments)
+            setProgress('d-none')
+          })
+          .catch(() => window.location.reload())
+      })
+      .catch(() => window.location.reload())
   }
 
   return (

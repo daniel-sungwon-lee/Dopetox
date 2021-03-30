@@ -94,6 +94,23 @@ app.post('/api/comments', (req, res, next) => {
     .catch(err => next(err))
 })
 
+app.get('/api/comments/:id', (req, res, next) => {
+  const { id } = req.params
+
+  const sql = `
+  select * from "comments"
+  where "id" = $1
+  order by "id"
+  `;
+  const params = [id]
+
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+})
+
 //for Heroku deployment
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
