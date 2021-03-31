@@ -47,7 +47,8 @@ export default function Nav(props) {
               </IconButton>
             </Tooltip>
 
-            <Add open={add} setOpen={setAdd} setProgress={setProgress} />
+            <Add open={add} setOpen={setAdd} setProgress={setProgress}
+             onClick={window.history.pushState({}, document.title, '/')} />
 
           </Toolbar>
         </AppBar>
