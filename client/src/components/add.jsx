@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, TextField,
-         Collapse, DialogActions, IconButton } from '@material-ui/core';
+         Collapse, DialogActions, IconButton, Tooltip } from '@material-ui/core';
 import { AddCircleRounded, RemoveCircleRounded } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -22,6 +22,12 @@ const useStyles = makeStyles({
   },
   icon: {
     fontSize: "2.5rem"
+  },
+  tooltip: {
+    backgroundColor: "#FB7B76",
+    fontSize: "16px",
+    borderRadius: "1rem",
+    padding: "16px"
   }
 })
 
@@ -124,13 +130,18 @@ export default function Add(props) {
           </DialogContent>
 
           <DialogActions>
+
             <IconButton onClick={handleClose}>
               <RemoveCircleRounded color="secondary" className={classes.icon} />
             </IconButton>
 
-            <IconButton type="submit">
-              <AddCircleRounded className={classes.iconAdd} />
-            </IconButton>
+            <Tooltip title="Please double check your form; once added, you are committed and can't make
+             any changes!" classes={{tooltip: classes.tooltip}}>
+              <IconButton type="submit">
+                <AddCircleRounded className={classes.iconAdd} />
+              </IconButton>
+            </Tooltip>
+
           </DialogActions>
         </form>
 
