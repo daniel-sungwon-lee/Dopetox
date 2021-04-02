@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, TextField,
-         Collapse, DialogActions, IconButton, Tooltip } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, TextField, Zoom,
+         DialogActions, IconButton, Tooltip } from '@material-ui/core';
 import { AddCircleRounded, RemoveCircleRounded } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -29,10 +29,6 @@ const useStyles = makeStyles({
     borderRadius: "1rem",
     padding: "16px"
   }
-})
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Collapse ref={ref} {...props} />
 })
 
 export default function Add(props) {
@@ -96,7 +92,7 @@ export default function Add(props) {
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)} classes={{paper: classes.dialog}}
-     TransitionComponent={Transition}>
+     scroll="body" TransitionComponent={Zoom}>
       <div className="m-3">
 
         <DialogTitle>
