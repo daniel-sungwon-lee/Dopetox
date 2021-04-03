@@ -273,7 +273,7 @@ function Comment(props) {
       </List>
 
       <form onSubmit={handleSubmit}>
-        <TextField label="Ask how it's going..." variant="outlined" required multiline
+        <TextField label="Add a note or comment..." variant="outlined" required multiline
           InputLabelProps={{ required: false }} onChange={handleChange} value={comment}
           className={classes.textarea} fullWidth />
 
