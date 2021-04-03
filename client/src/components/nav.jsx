@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { AppBar, Collapse, Toolbar, Tooltip, IconButton } from '@material-ui/core';
-import { NoteAddRounded } from '@material-ui/icons';
+import { NoteAddRounded, InfoRounded } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import Add from './add';
+import Info from './info';
 
 const useStyles = makeStyles({
   nav: {
@@ -14,6 +15,11 @@ const useStyles = makeStyles({
   icon: {
     fontSize: "3rem",
     color: "#FB7B76"
+  },
+  info: {
+    fontSize: "2.8rem",
+    color: "#FB7B76",
+    opacity: "0.5"
   }
 })
 
@@ -23,6 +29,7 @@ export default function Nav(props) {
 
   const [show, setShow] = useState(false)
   const [add, setAdd] = useState(false)
+  const [info, setInfo] = useState(false)
 
   useEffect(() => {
     setShow(true)
@@ -41,14 +48,24 @@ export default function Nav(props) {
               </div>
             </a>
 
-            <Tooltip title="Add" classes={{ tooltip: classes.tooltip }}>
-              <IconButton onClick={() => setAdd(true)}>
-                <NoteAddRounded className={classes.icon} />
-              </IconButton>
-            </Tooltip>
+            <div>
+              <Tooltip title="Info" classes={{ tooltip: classes.tooltip }}>
+                <IconButton onClick={() => setInfo(true)}>
+                  <InfoRounded className={classes.info} />
+                </IconButton>
+              </Tooltip>
 
-            <Add open={add} setOpen={setAdd} setProgress={setProgress}
-             onClick={window.history.pushState({}, document.title, '/')} />
+              <Info open={info} setOpen={setInfo} />
+
+              <Tooltip title="Add" classes={{ tooltip: classes.tooltip }}>
+                <IconButton onClick={() => setAdd(true)}>
+                  <NoteAddRounded className={classes.icon} />
+                </IconButton>
+              </Tooltip>
+
+              <Add open={add} setOpen={setAdd} setProgress={setProgress}
+              onClick={window.history.pushState({}, document.title, '/')} />
+            </div>
 
           </Toolbar>
         </AppBar>
