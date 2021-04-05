@@ -104,7 +104,7 @@ export default function Add(props) {
 
             <div className="mb-3">
               <TextField multiline id="username" variant="outlined" label="Username" classes={{ root: classes.textarea }} value={username}
-                helperText="Ex: Anonymous" required InputLabelProps={{ required: false }} fullWidth onChange={handleChange} />
+                helperText="Ex: anonymous" required InputLabelProps={{ required: false }} fullWidth onChange={handleChange} />
             </div>
 
             <div className="mb-3">
