@@ -79,7 +79,6 @@ export default function Add(props) {
       body: JSON.stringify(reqBody)
     })
       .then(() => {
-        window.location.pathname = "/"
         setUsername('')
         setDetox('')
         setDuration('')
