@@ -94,11 +94,8 @@ export default function Home(props) {
   const [show, setShow] = useState(false)
   const [expanded, setExpanded] = useState([])
   const [hidden, setHidden] = useState(false)
-  const [support, setSupport] = useState(0)
 
   useEffect(() => {
-    setProgress('')
-
     fetch('/api/detox')
       .then(res => res.json())
       .then(data => {
@@ -111,7 +108,7 @@ export default function Home(props) {
         setShow(true)
       })
       .catch(() => window.location.reload())
-  }, [setProgress])
+  }, [data, setProgress])
 
   const handleExpand = (id) => () => {
     if(expanded.includes(id)) {
@@ -121,6 +118,19 @@ export default function Home(props) {
     } else {
       setExpanded([...expanded, id])
     }
+  }
+
+  const handleSupport = (id, support) => () => {
+    setProgress('')
+    const reqBody = { support: support + 1}
+
+    fetch(`/api/detox/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(reqBody)
+    })
+      .then(() => setProgress('d-none'))
+      .catch(() => window.location.reload())
   }
 
   return (
@@ -138,7 +148,7 @@ export default function Home(props) {
       <div>
         {
           data.map(post => {
-            const { id, username, detox, duration, plan, createdAt } = post
+            const { id, username, detox, duration, plan, support, createdAt } = post
             const dateNew = new Date(createdAt)
             const date = dateNew.toLocaleDateString()
 
@@ -174,7 +184,7 @@ export default function Home(props) {
                   <CardActions className="justify-content-between">
                     <div className="d-flex align-items-center">
                       <Tooltip title="Support" classes={{ tooltip: classes.tooltip }}>
-                        <IconButton onClick={() => setSupport(support +1)}>
+                        <IconButton onClick={handleSupport(id, support)}>
                           <ThumbUpRounded className={classes.icon} />
                         </IconButton>
                       </Tooltip>

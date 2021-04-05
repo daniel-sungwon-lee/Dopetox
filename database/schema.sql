@@ -4,6 +4,7 @@ CREATE TABLE "detox" (
 	"detox" TEXT NOT NULL,
 	"duration" TEXT NOT NULL,
 	"plan" TEXT NOT NULL,
+	"support" integer NOT NULL,
   "createdAt" TIMESTAMP NOT NULL DEFAULT NOW(),
   CONSTRAINT "detox_pk" PRIMARY KEY ("id")
 ) WITH (
@@ -20,15 +21,6 @@ CREATE TABLE "comments" (
   OIDS=FALSE
 );
 
-CREATE TABLE "supports" (
-	"supportCount" integer NOT NULL,
-	"id" serial NOT NULL
-) WITH (
-  OIDS=FALSE
-);
-
 
 
 ALTER TABLE "comments" ADD CONSTRAINT "comments_fk0" FOREIGN KEY ("id") REFERENCES "detox"("id");
-
-ALTER TABLE "supports" ADD CONSTRAINT "supports_fk0" FOREIGN KEY ("id") REFERENCES "detox"("id");
