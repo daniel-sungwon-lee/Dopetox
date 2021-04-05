@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { CardContent, CardHeader, Collapse, Paper, Zoom, Fab, List,
          useScrollTrigger, CardActions, IconButton, TextField, ListItem,
-         ListItemText, Icon } from '@material-ui/core';
+         ListItemText, Icon, Tooltip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TimeAgo from 'react-timeago';
 import { KeyboardArrowUpRounded, ExpandMoreRounded, AddCommentRounded,
-         MoodBadRounded } from '@material-ui/icons';
+         MoodBadRounded, ThumbUpRounded } from '@material-ui/icons';
 import clsx from 'clsx';
 
 const useStyles = makeStyles( theme => ({
@@ -80,6 +80,9 @@ const useStyles = makeStyles( theme => ({
   },
   hidden: {
     display: "none"
+  },
+  tooltip: {
+    backgroundColor: "#FB7B76"
   }
 }))
 
@@ -91,6 +94,7 @@ export default function Home(props) {
   const [show, setShow] = useState(false)
   const [expanded, setExpanded] = useState([])
   const [hidden, setHidden] = useState(false)
+  const [support, setSupport] = useState(0)
 
   useEffect(() => {
     setProgress('')
@@ -167,7 +171,17 @@ export default function Home(props) {
                     </CardContent>
                   </div>
 
-                  <CardActions>
+                  <CardActions className="justify-content-between">
+                    <div className="d-flex align-items-center">
+                      <Tooltip title="Support" classes={{ tooltip: classes.tooltip }}>
+                        <IconButton onClick={() => setSupport(support +1)}>
+                          <ThumbUpRounded className={classes.icon} />
+                        </IconButton>
+                      </Tooltip>
+
+                      <h4 className="m-0 pl-1">{support}</h4>
+                    </div>
+
                     <IconButton className={clsx(classes.expand, classes.button, {
                       [classes.expandOpen]: expanded.includes(id),
                     })} onClick={handleExpand(id)}>
