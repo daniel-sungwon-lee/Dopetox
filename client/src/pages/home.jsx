@@ -96,8 +96,6 @@ export default function Home(props) {
   const [hidden, setHidden] = useState(false)
 
   useEffect(() => {
-    setProgress('')
-
     fetch('/api/detox')
       .then(res => res.json())
       .then(data => {
@@ -110,7 +108,7 @@ export default function Home(props) {
         setShow(true)
       })
       .catch(() => window.location.reload())
-  }, [setProgress])
+  }, [data, setProgress])
 
   const handleExpand = (id) => () => {
     if(expanded.includes(id)) {
@@ -122,8 +120,17 @@ export default function Home(props) {
     }
   }
 
-  const handleSupport = (id) => () => {
+  const handleSupport = (id, support) => () => {
+    setProgress('')
+    const reqBody = { support: support + 1}
 
+    fetch(`/api/detox/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(reqBody)
+    })
+      .then(() => setProgress('d-none'))
+      .catch(() => window.location.reload())
   }
 
   return (
@@ -177,7 +184,7 @@ export default function Home(props) {
                   <CardActions className="justify-content-between">
                     <div className="d-flex align-items-center">
                       <Tooltip title="Support" classes={{ tooltip: classes.tooltip }}>
-                        <IconButton onClick={handleSupport(id)}>
+                        <IconButton onClick={handleSupport(id, support)}>
                           <ThumbUpRounded className={classes.icon} />
                         </IconButton>
                       </Tooltip>
