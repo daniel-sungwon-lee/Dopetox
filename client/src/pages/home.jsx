@@ -104,11 +104,10 @@ export default function Home(props) {
         }
 
         setData(data)
-        setProgress('d-none')
         setShow(true)
       })
       .catch(() => window.location.reload())
-  }, [data, setProgress])
+  }, [data])
 
   const handleExpand = (id) => () => {
     if(expanded.includes(id)) {
