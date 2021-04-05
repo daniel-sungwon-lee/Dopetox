@@ -102,7 +102,6 @@ export default function Home(props) {
         if(data.length > 0){
           setHidden(true)
         }
-
         setData(data)
         setShow(true)
       })
