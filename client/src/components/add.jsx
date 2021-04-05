@@ -72,7 +72,7 @@ export default function Add(props) {
     e.preventDefault()
     setProgress('')
 
-    const reqBody = { username, detox, duration, plan }
+    const reqBody = { username, detox, duration, plan, support: 0 }
     fetch('/api/detox', {
       method: "POST",
       headers: { "Content-Type": "application/json" },

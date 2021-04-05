@@ -94,7 +94,6 @@ export default function Home(props) {
   const [show, setShow] = useState(false)
   const [expanded, setExpanded] = useState([])
   const [hidden, setHidden] = useState(false)
-  const [support, setSupport] = useState(0)
 
   useEffect(() => {
     setProgress('')
@@ -123,6 +122,10 @@ export default function Home(props) {
     }
   }
 
+  const handleSupport = (id) => () => {
+
+  }
+
   return (
     <div className="container" style={{paddingBottom: "6rem"}}>
 
@@ -138,7 +141,7 @@ export default function Home(props) {
       <div>
         {
           data.map(post => {
-            const { id, username, detox, duration, plan, createdAt } = post
+            const { id, username, detox, duration, plan, support, createdAt } = post
             const dateNew = new Date(createdAt)
             const date = dateNew.toLocaleDateString()
 
@@ -174,7 +177,7 @@ export default function Home(props) {
                   <CardActions className="justify-content-between">
                     <div className="d-flex align-items-center">
                       <Tooltip title="Support" classes={{ tooltip: classes.tooltip }}>
-                        <IconButton onClick={() => setSupport(support +1)}>
+                        <IconButton onClick={handleSupport(id)}>
                           <ThumbUpRounded className={classes.icon} />
                         </IconButton>
                       </Tooltip>

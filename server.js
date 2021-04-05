@@ -47,13 +47,13 @@ function errorMiddleware(err, req, res, next) {
 
 //add
 app.post('/api/detox', (req, res, next) => {
-  const { username, detox, duration, plan } = req.body;
+  const { username, detox, duration, plan, support } = req.body;
 
   const sql = `
-  insert into "detox" ("username", "detox", "duration", "plan")
-  values ($1, $2, $3, $4)
+  insert into "detox" ("username", "detox", "duration", "plan", "support")
+  values ($1, $2, $3, $4, $5)
   `;
-  const params = [username, detox, duration, plan]
+  const params = [username, detox, duration, plan, support]
 
   db.query(sql, params)
     .then(result => {
@@ -109,6 +109,25 @@ app.get('/api/comments/:id', (req, res, next) => {
       res.status(200).json(result.rows);
     })
     .catch(err => next(err));
+})
+
+//support
+app.patch('/api/detox/:id', (req, res, next) => {
+  const { id } = req.params;
+  const { support } = req.body;
+
+  const sql = `
+  update "detox"
+  set "support" = $2
+  where "id" = $1
+  `;
+  const params = [id, support]
+
+  db.query(sql, params)
+    .then(result => {
+      res.status(201).json(result.rows[0])
+    })
+    .catch(err => next(err))
 })
 
 //for Heroku deployment
