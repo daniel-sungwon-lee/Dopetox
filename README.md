@@ -8,7 +8,7 @@ Dopamine detox, or dopamine fast, is a process where you detox all the things in
 Tech stack: React, Redux, Material-UI, npm, JavaScript, Bootstrap, Express, PostgreSQL, Node.js, HTML/CSS, Heroku
 
 ## Live Site
-https://dopetox.herokuapp.com/
+https://dopetox.up.railway.app/
 
 ## Demo GIF
 ![dopetox-demo](https://user-images.githubusercontent.com/72715781/113335021-4352f200-92d9-11eb-89bc-249a8216f97b.gif)
